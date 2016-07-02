@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>BetPic Generator</title>
+	<meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+</head>
+<body>
+    
+    <div class="container-fluid">
+        <h1>Betfair Image Generator</h1>
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+            <div class="row">            
+                <div class="form-group">
+                    <label for="bet">Bet</label>
+                    <input type="text" id="bet" class="form-control" />
+
+                    <label for="market">Market</label>
+                    <input type="text" id="market" class="form-control" />
+
+                    <label for="fav">Favourite</label>
+                    <input type="text" id="fav" class="form-control" />
+
+                    <label for="dog">Underdog</label>
+                    <input type="text" id="dog" class="form-control" />
+                    <br />
+                    <button type="button" onclick="generate();" class="btn btn-primary">Create</button>
+                    <a class="btn btn-primary" id="downloadImg">Download</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <img id="example" src="eg.png" />
+        <img id="result" />
+        <p id="error"></p>
+    </div>
+
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+    <script>
+
+        $(document).ready(function()
+        {
+            $('#downloadImg').hide();
+        })
+        var uri = 'api/betpic';
+
+        function generate() {
+            var bet = $('#bet').val();
+            var market = $('#market').val();
+            var fav = $('#fav').val();
+            var dog = $('#dog').val();
+            $.getJSON(uri + '/?Bet=' + bet + '&Market=' + market + '&Fav=' + fav + '&Dog=' + dog)
+              .done(function (data) {
+                  $('#example').hide();
+                  $('#downloadImg').show();
+                  $('#result').attr('src', 'data:image/png;base64,' + data.ImageBase64);
+                  $('#downloadImg').attr('href', 'data:image/png;base64,' + data.ImageBase64);
+                  $('#downloadImg').attr('download', data.Filename);
+
+              })
+              .fail(function (jqXHR, textStatus, err) {
+                  $('#error').text('Error: ' + err);
+              });
+        }
+    </script>
+</body>
+</html>
