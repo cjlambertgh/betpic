@@ -7,7 +7,8 @@
     <WebStackScaffolding_IsReferencingScriptLibrariesSelected>True</WebStackScaffolding_IsReferencingScriptLibrariesSelected>
     <WebStackScaffolding_LayoutPageFile />
     <WebStackScaffolding_IsAsyncSelected>False</WebStackScaffolding_IsAsyncSelected>
-    <NameOfLastUsedPublishProfile>vwps</NameOfLastUsedPublishProfile>
+    <NameOfLastUsedPublishProfile>wvps1</NameOfLastUsedPublishProfile>
+    <UseIISExpress>true</UseIISExpress>
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>
